@@ -21,7 +21,7 @@ func main() {
 	log.Println("Staring mail service on port", webPort)
 
 	srv := &http.Server{
-		Addr:    fmt.Sprint(":%s", webPort),
+		Addr:    fmt.Sprintf(":%s", webPort),
 		Handler: app.routes(),
 	}
 

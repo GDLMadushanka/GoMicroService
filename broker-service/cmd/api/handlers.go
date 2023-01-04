@@ -138,6 +138,7 @@ func (app *Config) sendMail(w http.ResponseWriter, msg MailPayload) {
 		app.errorJSON(w, err)
 		return
 	}
+	request.Header.Set("Content-Type", "application/json")
 	client := &http.Client{}
 	response, err := client.Do(request)
 	if err != nil {
@@ -153,7 +154,7 @@ func (app *Config) sendMail(w http.ResponseWriter, msg MailPayload) {
 
 	var payload jsonResponse
 	payload.Error = false
-	payload.Message = "logged"
+	payload.Message = "Mail sent to: " + msg.To
 
 	app.writeJSON(w, http.StatusAccepted, payload)
 }
